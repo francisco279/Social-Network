@@ -2,6 +2,6 @@
 A simple social network to upload images
 
 # Technologies
-## Handlebars
-## NodeJS
-## MongoDB
+Handlebars
+NodeJS
+MongoDB
