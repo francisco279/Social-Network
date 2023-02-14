@@ -1,0 +1,91 @@
+<div class="card border-white">
+    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+        <h2>{{image.title}}</h2>
+        <button class="btn btn-danger" id="btn-delete" data-id="{{image.uniqueId}}">
+            Delete
+        </button>
+    </div>
+    <div class="card-body">
+        {{image.description}}
+        <div class="text-center">
+            <img src="/public/upload/{{image.filename}}" alt="" class="img-fluid">
+        </div>
+    </div>
+    <div class="card-footer d-flex justify-content-between align-items-center bg-dark text-white">
+        <button class="btn btn-success" id="btn-like" data-id="{{image.filename}}">
+            <span class="material-symbols-outlined">
+                thumb_up
+            </span>
+            Like
+        </button>
+        <p>
+            <span class="material-symbols-outlined">
+                favorite
+            </span>
+            <span class="likes-count">{{image.likes}}</span>
+        </p>
+
+        <p>
+            <span class="material-symbols-outlined">
+                visibility
+            </span>
+            <span>{{image.views}}</span>
+        </p>
+        <p>
+            <span class="material-symbols-outlined">
+                schedule
+            </span>
+            <span>{{timeAgo image.timestamp}}</span>
+        </p>
+        
+    </div>
+</div>
+
+<div class="card mt-2 bg-dark border-white">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h1>Comments</h1>
+        <button class="btn btn-info" id="btn-toggle-comment">
+            Post a comment
+        </button>
+    </div>
+    <div class="card-body" id="post-comment">
+        <blockquote >
+            <form action="/images/{{image.uniqueId}}/comment" method="POST">
+                <div class="form-group">
+                    <label for="">Name</label>
+                    <input type="text" name="name" class="form-control bg-dark text-white">
+                </div>
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="text" name="email" class="form-control bg-dark text-white">
+                </div>
+                <div class="form-group pb-2">
+                    <label for="">Comment</label>
+                    <textarea type="text" name="comment" class="form-control bg-dark text-white"></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success" id="btn-comment">
+                        Post
+                    </button>
+                </div>
+            </form>
+        </blockquote>
+        <ul class="list-group pb-4">
+            {{#each comments}}
+                <li class="list-group-item bg-dark text-white">
+                    <div class="row">
+                        <a href="#" class="col text-center">
+                            <img src="http://gravatar.com/avatar/{{gravatar}}?d=monsterid&s=45">
+                        </a>
+                        <blockquote class="col">
+                            <p class="lead">{{comment}}</p>
+                            <footer class="blockquote-footer">
+                                {{name}} - {{timeAgo timestamp}}
+                            </footer>
+                        </blockquote>
+                    </div>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+</div>
